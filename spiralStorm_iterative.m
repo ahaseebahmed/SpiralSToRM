@@ -1,11 +1,3 @@
-%This code is used for reconstructing cardiac cine MRI.
-%if you are using this code or data, please cite the paper below:
-
-% A.H. Ahmed, Y. Mohsin, R. Zhao, Y. Yang, M. Salerno, P. Nagpal, M. Jacob, 
-% Free-breathing and ungated cardiac cine using navigator-less spiral SToRM
-% (submitted to MRM).
-% Feel free to contact: abdul-ahmed@uiowa.edu
-
 clear all
 
 addpath('./csm');
@@ -18,7 +10,7 @@ spiralsToDelete=100;
 ninterleavesPerFrame=5;
 N = 340;
 nChannelsToChoose=8;
-numFramesToKeep = 100;
+numFramesToKeep = 500;
 useGPU = 1;
 SHRINK_FACTOR = 1.0;
 nBasis = 20;
@@ -32,8 +24,8 @@ eig_csm=0.01;
 % % ==============================================================
 % % Load the data
 % % ============================================================== 
-load('series11.mat'); 
-kdata=kdata(:,:,:,1);
+load('./../series11.mat'); 
+kdata=kdata(:,:,:,1); % Fourth Slice Data
 kdata=kdata/max(abs(kdata(:)));
 
  %% =========================================
