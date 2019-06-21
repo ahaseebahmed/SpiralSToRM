@@ -14,10 +14,10 @@ numFramesToKeep = 200;
 useGPU = 1;
 SHRINK_FACTOR = 1.0;
 nBasis = 30;
-lambdaSmoothness = 0.025;
+lambdaSmoothness = 0.05;
 cRatioI=1:nChannelsToChoose;
 sigma=[4.5];
-lam=[0.1];
+lam=[0.3];
 eig_csm=0.15;
 %%
 % % ==============================================================
@@ -63,13 +63,13 @@ kdata=reshape(vkdata,[nFreqEncoding,ninterleavesPerFrame,numFramesToKeep,nChanne
 csm=giveEspiritMaps(reshape(vcoilImages,[size(vcoilImages,1), size(vcoilImages,2), nChannelsToChoose]),eig_csm*max(abs(vcoilImages(:))));
 ktraj_scaled=reshape(ktraj_scaled,[nFreqEncoding,ninterleavesPerFrame,numFramesToKeep]);
 kdata=reshape(kdata,[nFreqEncoding,ninterleavesPerFrame,numFramesToKeep,nChannelsToChoose]);
-%clear vcoilImages vkdata;
+clear vcoilImages vkdata;
 %% ==============================================================
 % % Compute the weight matrix
 % % ============================================================= 
 no_ch=size(csm,3);
 Nav=permute((kdata(:,1,:,:)),[1,2,4,3]);
-[~,~,L]=estimateLapKernelLR(reshape(Nav,[nFreqEncoding*no_ch,numFramesToKeep]),sigma,lam);
+[~,x1,L]=estimateLapKernelLR(reshape(Nav,[nFreqEncoding*no_ch,numFramesToKeep]),sigma,lam);
 [~,Sbasis,V]=svd(L);
 V=V(:,end-nBasis+1:end);
 Sbasis=Sbasis(end-nBasis+1:end,end-nBasis+1:end);
@@ -85,6 +85,6 @@ y = reshape(reshape(x,[N*N,nBasis])*V',[N,N,numFramesToKeep]);
 %% ==============================================================
 % % Save and Display results
 % % ============================================================= 
-for i=1:size(y,3);imagesc(flipud(fliplr(abs(y(:,:,i))))); pause(0.1); colormap gray;end
+for i=1:size(y,3);imagesc(fliplr(abs(y(:,:,i)))); pause(0.1); colormap gray;end
 
 
