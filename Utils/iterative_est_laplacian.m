@@ -26,7 +26,7 @@ Lnn = (diag(sum(W,1))-W);
 lambda2=0.0001;
 Xpre=zeros(N1*N1,nf);
 
-for i=1:10
+for i=1:30
   
     Atb = Atb_LR(FT,kdata,csm_lowRes,true);
     lambda1=lam*max(abs(Atb(:)));
