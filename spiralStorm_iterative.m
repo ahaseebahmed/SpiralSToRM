@@ -18,7 +18,7 @@ lambdaSmoothness = 0.05;
 cRatioI=1:nChannelsToChoose;
 NsamplesToKeep=600;
 sigma=[4.5];
-lam=[0.08];
+lam=[0.1];
 eig_csm=0.01;
 %%
 % % ==============================================================
@@ -70,7 +70,7 @@ clear vkdata;
 % % ============================================================= 
 kdata_com = reshape(kdata(1:NsamplesToKeep,:,:,:),[NsamplesToKeep,ninterleavesPerFrame,numFramesToKeep,nChannelsToChoose]);
 ktraj_com = reshape(ktraj_scaled(1:NsamplesToKeep,:,:,:),[NsamplesToKeep,ninterleavesPerFrame,numFramesToKeep]);
-N1 = 48;
+N1 = 64;
 csm_lowRes = giveEspiritMapsSmall(coilImages,N1,N1);
 ktraj_com = reshape(ktraj_com/N1,[size(ktraj_com,1),size(ktraj_com,2),numFramesToKeep]);
 kdata_com = reshape(kdata_com, [size(kdata_com,1),size(ktraj_com,2),numFramesToKeep,nChannelsToChoose]);
