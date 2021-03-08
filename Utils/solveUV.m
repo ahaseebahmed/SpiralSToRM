@@ -18,7 +18,7 @@ else
     FT= NUFFT(ktraj/N,1,0,0,[N,N]);
     Atb = Atb_UV(FT,kdata,V,csm,N,false);
     Reg = @(x) reshape(reshape(x,[N*N,nbasis])*SBasis,[N*N*nbasis,1]);
-    AtA = @(x) AtA_UV(FT,x,V,csm,nSamplesPerFrame)+Reg(x);
+    AtA = @(x) AtA_UV(FT,x,V,csm,N,nSamplesPerFrame)+Reg(x);
 end
 
 x = pcg(AtA,Atb(:),1e-5,nIterations);
