@@ -9,7 +9,7 @@ addpath(genpath('./gpuNUFFT'));
 spiralsToDelete=100;
 ninterleavesPerFrame=5;
 N = 340;
-nChannelsToChoose=8;
+nChannelsToChoose=4;
 numFramesToKeep = 500;
 useGPU = 1;
 SHRINK_FACTOR = 1.3;
@@ -26,6 +26,7 @@ eig_csm=0.01;
 % % ============================================================== 
 load('./../series11.mat'); 
 kdata=kdata(:,:,:,1); % Fourth Slice Data
+kdata = permute(kdata,[1,3,2]);
 kdata=kdata/max(abs(kdata(:)));
 
  %% =========================================
